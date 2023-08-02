@@ -6,7 +6,7 @@ on:
 
 jobs:
   generate_files_and_commit:
-    runs-on: default
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
