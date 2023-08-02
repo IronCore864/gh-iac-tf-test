@@ -17,6 +17,10 @@ jobs:
       with:
         python-version: '3.x'
 
+    - name: Setup Dependencies
+      working-directory: "terraform/github/scripts/"
+      run: pip install -r requirements.txt
+
     - name: Generate files
       working-directory: "terraform/github/scripts/"
       run: python main.py
