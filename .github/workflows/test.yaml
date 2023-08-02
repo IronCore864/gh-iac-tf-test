@@ -6,7 +6,7 @@ on:
 
 jobs:
   generate_files_and_commit:
-    runs-on: default
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
@@ -31,7 +31,7 @@ jobs:
         git config --global user.name "GitHub Actions"
         git add .
         git commit -m "Generated files"
-        git push --set-upstream origin $GITHUB_HEAD_REF
+        git push --set-upstream origin HEAD:${{ github.head_ref }}
 
     - name: Check commit message
       if: contains(github.event.head_commit.message, 'Generated files')
