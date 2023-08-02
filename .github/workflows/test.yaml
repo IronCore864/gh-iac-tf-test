@@ -11,6 +11,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+      with:
+        ref: ${{ github.head_ref }}
 
     - name: Set up Git
       uses: actions/setup-python@v4
@@ -31,7 +33,7 @@ jobs:
         git config --global user.name "GitHub Actions"
         git add .
         git commit -m "Generated files"
-        git push --set-upstream origin HEAD:${{ github.head_ref }}
+        git push --set-upstream origin ${{ github.head_ref }}
 
     - name: Check commit message
       if: contains(github.event.head_commit.message, 'Generated files')
