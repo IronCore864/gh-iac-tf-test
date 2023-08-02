@@ -31,7 +31,6 @@ jobs:
         git config --global user.name "GitHub Actions"
         git add .
         git commit -m "Generated files"
-        git pull origin ${{ github.head_ref }}
         git push --set-upstream origin ${{ github.head_ref }}
 
     - name: Check commit message
