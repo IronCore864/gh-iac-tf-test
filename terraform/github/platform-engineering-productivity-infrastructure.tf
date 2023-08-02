@@ -9,6 +9,7 @@ resource "github_team_membership" "test_team_1_by_terraform_IronCore864" {
   username = "IronCore864"
   role     = "maintainer"
 }
+
 resource "github_team" "test_team_2_by_terraform" {
   name        = "Test Team 2 by Terraform"
   description = "The Test Team 2, managed by Terraform"

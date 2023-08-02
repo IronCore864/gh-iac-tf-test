@@ -7,14 +7,24 @@ def read_template(file_path):
     with open(file_path, "r") as f:
         return f.read()
 
-
 def ensure_single_newline(string):
     """
-    Ensure that a multi-line string only contains one final newline character at the end.
+    Ensure that a multiline string has only one new line at the end.
+    
+    Args:
+        string (str): The input string.
+        
+    Returns:
+        str: The modified string.
     """
-    if string.endswith("\n"):
-        return string[:-1]
-
+    # Strip all trailing whitespace, including newlines
+    stripped = string.rstrip()
+    
+    # Add a single newline at the end
+    modified = stripped + "\n"
+    
+    # Return the modified string
+    return modified
 
 def generate_team_resource(team, parent):
     res = ""
@@ -95,7 +105,7 @@ def main():
             # Start generating HCL
             hcl = ""
             for team in data["teams"]:
-                hcl += ensure_single_newline(generate_hcl(team))
+                hcl += generate_hcl(team)
 
             # Write HCL to file
             parent_folder_name = os.path.basename(
@@ -104,7 +114,7 @@ def main():
             base_name = os.path.splitext(file)[0]
             output_file = f"{parent_folder_name}-{base_name}.tf"
             with open(f"../{output_file}", "w") as f:
-                f.write(hcl)
+                f.write(ensure_single_newline(hcl))
 
 
 if __name__ == "__main__":
