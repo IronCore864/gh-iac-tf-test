@@ -4,8 +4,6 @@ teams:
     members:
       - username: "IronCore864"
         role: "maintainer"
-      - username: "IronCore864123"
-        role: "member"
   - name: "Test Team 2 by Terraform"
     description: "The Test Team 2, managed by Terraform"
     members:
