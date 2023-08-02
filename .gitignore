@@ -1,0 +1,4 @@
+**/.terraform
+**/terraform.tfstate*
+**/gh-iac-test.private-key.pem
+__pycache__

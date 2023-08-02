@@ -1,0 +1,34 @@
+name: Generate files and commit changes
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  generate_files_and_commit:
+    runs-on: default
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Git
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Generate files
+      working-directory: "terraform/github/scripts/"
+      run: python main.py
+
+    - name: Commit files
+      run: |
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git config --global user.name "GitHub Actions"
+        git add .
+        git commit -m "Generated files"
+        git push --set-upstream origin $GITHUB_HEAD_REF
+
+    - name: Check commit message
+      if: contains(github.event.head_commit.message, 'Generated files')
+      run: exit 0
